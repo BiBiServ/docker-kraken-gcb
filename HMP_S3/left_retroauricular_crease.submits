@@ -1,0 +1,9 @@
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS013258 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS013258.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS016944 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS016944.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS017849 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS017849.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS019015 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS019015.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS019063 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS019063.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS020261 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS020261.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS024482 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS024482.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS024596 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS024596.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS024620 s3://human-microbiome-project/HHS/HMASM/WGS/left_retroauricular_crease/SRS024620.tar.bz2 /vol/spool /vol/scratch
