@@ -59,3 +59,7 @@ print STDERR "/vol/kraken/kraken-report --db $krakendb_dir $outfile > $outfile.r
 system("/vol/kraken/kraken-report --db $krakendb_dir $outfile > $outfile.report");
 print STDERR "Kraken report done.\n";
 
+chdir("/vol/scratch");
+system("rm -v $bz2file");
+system("rm -rfv $jobname");
+
