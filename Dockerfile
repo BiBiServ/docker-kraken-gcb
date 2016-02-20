@@ -12,7 +12,7 @@ MAINTAINER Name asczyrba@cebitec.uni-bielefeld.de
 # e.g. RUN apt-get install -y -f bc
 
 RUN apt-get update
-RUN apt-get install -y -f perl-modules libgomp1 openjdk-7-jre
+RUN apt-get install -y -f perl-modules libgomp1 openjdk-7-jre lbzip2
 
 # create directories where the host file system can be mounted
 RUN mkdir /vol
