@@ -37,9 +37,3 @@ After logout, terminate the BiBiGrid cluster:
     bibigrid.sh -t CLUSTERID
     
 
-# docker-kraken-hmp
-#
-#    for i in `grep WGS human-microbiome-project.listing | awk '{print $4}'  | grep HMASM | cut -f4 -d'/' | sort -u`; do grep $i human-microbiome-project.listing | grep HMASM | grep WGS | awk '{print "s3://human-microbiome-project/"$4}' > $i.fof ; done
-#
-#    for i in `grep WGS human-microbiome-project.listing | awk '{print $4}'  | grep HMASM | cut -f4 -d'/' | sort -u`; do grep $i human-microbiome-project.listing | grep HMASM | grep WGS  > $i ; done
-    
