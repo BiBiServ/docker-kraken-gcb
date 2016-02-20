@@ -49,8 +49,10 @@ chdir "/vol/spool";
 my $outfile = "$outdir/$jobname.out";
 ## run kraken
 print STDERR "running kraken:\n";
-print STDERR "/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fastq-input --output $outfile --paired `ls /vol/scratch/$jobname/$jobname.*[12].fastq`\n";
-system("/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fastq-input --output $outfile --paired `ls /vol/scratch/$jobname/$jobname.*[12].fastq`");
+#print STDERR "/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fastq-input --output $outfile --paired `ls /vol/scratch/$jobname/$jobname.*[12].fastq`\n";
+#system("/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fastq-input --output $outfile --paired `ls /vol/scratch/$jobname/$jobname.*[12].fastq`");
+print STDERR "/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fastq-input --output $outfile `ls /vol/scratch/$jobname/$jobname.*[12].fastq`\n";
+system("/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fastq-input --output $outfile `ls /vol/scratch/$jobname/$jobname.*[12].fastq`");
 print STDERR "kraken done.\n";
 
 ## create reports
