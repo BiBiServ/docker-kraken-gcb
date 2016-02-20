@@ -41,7 +41,7 @@ print STDERR "Done downloading FASTQ file.\n";
 chdir("/vol/scratch");
 my $bz2file = basename($infile);
 print STDERR "extracting file $bz2file...\n";
-system("tar xvjf $bz2file");
+system("lbzip2 -cd $bz2file | tar xvf -");
 print STDERR "extracting done.\n";
 
 chdir "/vol/spool";
@@ -54,10 +54,10 @@ system("/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fas
 print STDERR "kraken done.\n";
 
 ## create reports
-print STDERR "creating Kraken report:\n";
-print STDERR "/vol/kraken/kraken-report --db $krakendb_dir $outfile > $outfile.report\n";
-system("/vol/kraken/kraken-report --db $krakendb_dir $outfile > $outfile.report");
-print STDERR "Kraken report done.\n";
+#print STDERR "creating Kraken report:\n";
+#print STDERR "/vol/kraken/kraken-report --db $krakendb_dir $outfile > $outfile.report\n";
+#system("/vol/kraken/kraken-report --db $krakendb_dir $outfile > $outfile.report");
+#print STDERR "Kraken report done.\n";
 
 chdir("/vol/scratch");
 system("rm -v $bz2file");
