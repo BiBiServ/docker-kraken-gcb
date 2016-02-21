@@ -43,7 +43,8 @@ my $bz2file = basename($infile);
 print STDERR "extracting file $bz2file...\n";
 system("lbzip2 -cd $bz2file | tar xvf -");
 print STDERR "extracting done.\n";
-
+print "FASTQ file sizes:\n";
+system("ls -l $jobname");
 chdir "/vol/spool";
 
 my $outfile = "$outdir/$jobname.out";
