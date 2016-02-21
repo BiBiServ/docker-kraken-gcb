@@ -11,8 +11,9 @@ MAINTAINER Name asczyrba@cebitec.uni-bielefeld.de
 # install the required packages to the base ubuntu installation
 # e.g. RUN apt-get install -y -f bc
 
-RUN apt-get update
-RUN apt-get install -y -f perl-modules libgomp1 openjdk-7-jre lbzip2
+RUN apt-get update && \
+    apt-get install -y -f perl-modules libgomp1 openjdk-7-jre-headless lbzip2 && \
+    rm -rf /var/lib/apt/lists/*
 
 # create directories where the host file system can be mounted
 RUN mkdir /vol
