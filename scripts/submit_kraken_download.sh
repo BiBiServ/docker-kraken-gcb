@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if [ $# -ne 6 ]
+if [ $# -ne 7 ]
   then
-    echo "Usage: $0 SLOTS NUM_NODES SCRATCHDIR SPOOLDIR KRAKENDB KRAKENDB_DIR"
+    echo "Usage: $0 SLOTS NUM_NODES SCRATCHDIR SPOOLDIR MEMDISK KRAKENDB KRAKENDB_DIR"
     echo
-    echo "Example: $0 8 2 /vol/scratch /vol/spool s3://bibicloud-demo/kraken-db/minikraken_20140330.tar /vol/scratch/krakendb"
+    echo "Example: $0 8 2 /vol/scratch /vol/spool /dev/shm s3://bibicloud-demo/kraken-db/minikraken_20140330.tar /vol/mem/krakendb"
     exit 1
 fi
 
@@ -12,12 +12,13 @@ SLOTS=$1
 NUM_NODES=$2
 SCRATCHDIR=$3
 SPOOLDIR=$4
-KRAKENDB=$5
-KRAKENDB_DIR=$6
+MEMDISK=$5
+KRAKENDB=$6
+KRAKENDB_DIR=$7
 
 PIPELINEHOME=`dirname $0`
 
 echo "Submitting job to SGE and waiting until finished..."
-echo qsub -cwd -t 1-$NUM_NODES -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $SPOOLDIR "/vol/scripts/kraken_download_db.pl -krakendb $KRAKENDB -dest $KRAKENDB_DIR"
-qsub -cwd -N KrakenDB_download -t 1-$NUM_NODES -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $SPOOLDIR "/vol/scripts/kraken_download_db.pl -krakendb $KRAKENDB -dest $KRAKENDB_DIR"
+echo qsub -cwd -t 1-$NUM_NODES -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $SPOOLDIR $MEMDISK "/vol/scripts/kraken_download_db.pl -krakendb $KRAKENDB -download_dir $SCRATCHDIR -dest $KRAKENDB_DIR"
+qsub -cwd -N KrakenDB_download -t 1-$NUM_NODES -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $SPOOLDIR $MEMDISK "/vol/scripts/kraken_download_db.pl -krakendb $KRAKENDB -download_dir $SCRATCHDIR -dest $KRAKENDB_DIR"
 
