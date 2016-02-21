@@ -1,0 +1,2 @@
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS014466 s3://human-microbiome-project/HHS/HMASM/WGS/mid_vagina/SRS014466.tar.bz2 /vol/spool /vol/scratch /dev/shm
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS015072 s3://human-microbiome-project/HHS/HMASM/WGS/mid_vagina/SRS015072.tar.bz2 /vol/spool /vol/scratch /dev/shm

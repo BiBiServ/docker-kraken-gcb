@@ -1,0 +1,4 @@
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch /dev/shm
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS022006 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS022006.tar.bz2 /vol/spool /vol/scratch /dev/shm
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS023847 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS023847.tar.bz2 /vol/spool /vol/scratch /dev/shm
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS050484 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS050484.tar.bz2 /vol/spool /vol/scratch /dev/shm
