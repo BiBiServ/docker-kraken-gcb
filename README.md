@@ -31,6 +31,10 @@ Start the pipeline:
 
      /vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/scratch/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch
 
+Create report:
+
+    /vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch
+    
 After logout, terminate the BiBiGrid cluster:
 
     bibigrid.sh -l
