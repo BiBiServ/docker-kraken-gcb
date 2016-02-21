@@ -2,7 +2,7 @@
 
 if [ $# -ne 7 ]
   then
-    echo "Usage: $0 SLOTS KRAKENDB JOBNAME S3_HMP_DATASET OUTDIR TMPDIR"
+    echo "Usage: $0 SLOTS KRAKENDB JOBNAME S3_HMP_DATASET OUTDIR TMPDIR MEMDISK"
     echo
     echo "Example: $0 8 /vol/mem/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch /dev/shm"
     exit 1
@@ -23,8 +23,8 @@ export PATH=$PIPELINEHOME/krona/bin:$PATH
 echo $PIPELINEHOME
 
 echo "Submitting job to SGE..."
-echo qsub -cwd -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $OUTDIR $MEMDISK "/vol/scripts/kraken_pipeline.pl -krakendb $KRAKENDB -infile $BZ2FILE -outdir $OUTDIR -jobname $JOBNAME"
-qsub -N $JOBNAME -cwd -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $OUTDIR $MEMDISK "/vol/scripts/kraken_pipeline.pl -krakendb $KRAKENDB -infile $BZ2FILE -outdir $OUTDIR -jobname $JOBNAME"
+echo qsub -cwd -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $OUTDIR $MEMDISK "/vol/scripts/kraken_pipeline.pl -krakendb $KRAKENDB -infile $BZ2FILE -outdir $OUTDIR -tmpdir $SCRATCHDIR -jobname $JOBNAME"
+qsub -N $JOBNAME -cwd -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $OUTDIR $MEMDISK "/vol/scripts/kraken_pipeline.pl -krakendb $KRAKENDB -infile $BZ2FILE -outdir $OUTDIR -tmpdir $SCRATCHDIR -jobname $JOBNAME"
 
 exit
 ## combine Kraken output and convert
