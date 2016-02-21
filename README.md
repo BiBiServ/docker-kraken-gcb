@@ -25,16 +25,12 @@ The following commands assume that you have a cluster of 2 slave nodes with 32 c
 
 Download the Kraken DB:
 
-     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_download.sh 32 2 /vol/scratch /vol/spool /dev/shm s3://bibicloud-demo/kraken-db/minikraken_20140330.tar /vol/mem/krakendb
+     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_download.sh 32 20 /vol/scratch /vol/spool /dev/shm s3://bibicloud-demo/kraken-db/kraken_standard.tar /vol/mem/krakendb
 
 Start the pipeline:
 
      /vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/mem/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch /dev/shm
 
-Create report:
-
-    /vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch
-    
 After logout, terminate the BiBiGrid cluster:
 
     bibigrid.sh -l
