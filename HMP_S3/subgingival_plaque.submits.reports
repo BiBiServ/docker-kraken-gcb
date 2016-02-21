@@ -1,0 +1,7 @@
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS013950 s3://human-microbiome-project/HHS/HMASM/WGS/subgingival_plaque/SRS013950.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS014107 s3://human-microbiome-project/HHS/HMASM/WGS/subgingival_plaque/SRS014107.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS014477 s3://human-microbiome-project/HHS/HMASM/WGS/subgingival_plaque/SRS014477.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS014691 s3://human-microbiome-project/HHS/HMASM/WGS/subgingival_plaque/SRS014691.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS019029 s3://human-microbiome-project/HHS/HMASM/WGS/subgingival_plaque/SRS019029.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS019129 s3://human-microbiome-project/HHS/HMASM/WGS/subgingival_plaque/SRS019129.tar.bz2 /vol/spool /vol/scratch
+/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS063215 s3://human-microbiome-project/HHS/HMASM/WGS/subgingival_plaque/SRS063215.tar.bz2 /vol/spool /vol/scratch
