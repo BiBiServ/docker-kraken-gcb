@@ -33,9 +33,11 @@ mkpath($download_dir);
 print STDERR "host: $host\n";
 
 print STDERR "Downloading Database to $download_dir...\n";
-print STDERR "/vol/scripts/download.pl -type file -source $krakendb -dest $download_dir\n";
-system("/vol/scripts/download.pl -type file -source $krakendb -dest $download_dir");
+#print STDERR "/vol/scripts/download.pl -type file -source $krakendb -dest $download_dir\n";
+#system("/vol/scripts/download.pl -type file -source $krakendb -dest $download_dir");
 
+print STDERR "java -jar /vol/scripts/bibis3-1.6.1.jar --region=eu-west-1 -d $krakendb $download_dir/\n";
+system("java -jar /vol/scripts/bibis3-1.6.1.jar --region=eu-west-1 -d $krakendb $download_dir/");
 
 chdir $krakendb_dir;
 my $kraken_tarfile = basename($krakendb);
