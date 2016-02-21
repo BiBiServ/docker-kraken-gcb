@@ -45,9 +45,13 @@ system("lbzip2 -n $threads -cd $bz2file | tar xvf -");
 print STDERR "extracting done.\n";
 print "FASTQ file sizes:\n";
 system("ls -l $jobname");
+system("rm -v $bz2file");
+
 chdir "/vol/spool";
 
 my $outfile = "$outdir/$jobname.out";
+my $reportfile = "$outdir/$jobname.report";
+
 ## run kraken
 print STDERR "running kraken:\n";
 #print STDERR "/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fastq-input --output $outfile --paired `ls /vol/scratch/$jobname/$jobname.*[12].fastq`\n";
@@ -57,12 +61,18 @@ system("/vol/kraken/kraken --preload --db $krakendb_dir --threads $threads --fas
 print STDERR "kraken done.\n";
 
 ## create reports
-#print STDERR "creating Kraken report:\n";
-#print STDERR "/vol/kraken/kraken-report --db $krakendb_dir $outfile > $outfile.report\n";
-#system("/vol/kraken/kraken-report --db $krakendb_dir $outfile > $outfile.report");
-#print STDERR "Kraken report done.\n";
+print STDERR "creating Kraken report:\n";
+print STDERR "/vol/kraken/kraken-report --db $krakendb_dir $outfile > $reportfile\n";
+system("/vol/kraken/kraken-report --db $krakendb_dir $outfile > $reportfile");
+print STDERR "Kraken report done.\n";
+system("rm -rfv $outfile");
 
 chdir("/vol/scratch");
-system("rm -v $bz2file");
 system("rm -rfv $jobname");
+
+
+
+chdir "/vol/spool";
+my $outfile = "$outdir/$jobname.out";
+
 
