@@ -21,12 +21,12 @@ Build the Docker image (optional, image is hosted by Docker Hub already):
     sudo docker build -t "asczyrba/kraken-hmp" .
     sudo docker push asczyrba/kraken-hmp
 
-The following commands assume that you have a cluster of 2 slave nodes with 32 cores each.
+The following commands assume that you have a cluster of 99 slave nodes with 32 cores each.
 
 Download the Kraken DB:
 
-     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_download.sh 32 20 /vol/scratch /vol/spool /dev/shm s3://bibicloud-demo/kraken-db/kraken_standard.tar /vol/mem/krakendb
-
+     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_download.sh 32 99 /vol/scratch /vol/spool /dev/shm s3://bibicloud-demo-oregon/kraken-db/krakendb_120GB.tar us-west-2 /vol/mem/krakendb
+     
 Start the pipeline:
 
      /vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/mem/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch /dev/shm
