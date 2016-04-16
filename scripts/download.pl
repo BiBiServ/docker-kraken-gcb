@@ -3,19 +3,20 @@
 use Getopt::Long;
 use strict;
 
-my ($type, $source, $dest, $grid_nodes, $current_node);
+my ($type, $source, $aws_region, $dest, $grid_nodes, $current_node);
 my $bibis3call;
 my $bibis3bin = '/vol/scripts/bibis3-1.6.1.jar';
 
 GetOptions("type=s"         => \$type,
 	   "source=s"       => \$source,
+	   "aws_region=s"   => \$aws_region,
 	   "dest=s"         => \$dest,
 	   "grid-nodes:i"   => \$grid_nodes,
 	   "current-node:i" => \$current_node,
     );
 
-unless ($type && $source && $dest) {
-    die "\nusage: $0 -type [folder|file|split-fastq] -source SOURCE -dest DESTINATION [-grid-nodes INT -current-node INT]
+unless ($type && $source && $aws_region && $dest) {
+    die "\nusage: $0 -type [folder|file|split-fastq] -source SOURCE -aws_region AWS_REGION -dest DESTINATION [-grid-nodes INT -current-node INT]
 
 ";
 }
@@ -23,12 +24,12 @@ unless ($type && $source && $dest) {
 
 if ($type eq "folder") {
     $bibis3call = ("java -jar $bibis3bin -r ".
-#		   "--region eu-west-1 ".
+		   "--region $aws_region ".
 		   "-d $source $dest");
 }
 elsif ($type eq "file") {
     $bibis3call = ("java -jar $bibis3bin ".
-#		   "--region eu-west-1 ".
+		   "--region $aws_region ".
 		   "-d $source $dest");
 }
 elsif ($type eq "split-fastq") {
@@ -36,7 +37,7 @@ elsif ($type eq "split-fastq") {
 	die "specify grid-nodes and current-node for split-fastq download type\n";
     }
     $bibis3call = ("java -jar $bibis3bin ".
-#		   "--region eu-west-1 ".
+		   "--region $aws_region ".
 		   "--grid-download ".
 		   "--grid-download-feature-fastq ".
 		   "--grid-nodes $grid_nodes ".

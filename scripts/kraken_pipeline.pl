@@ -9,10 +9,11 @@ use strict;
 
 $ENV{PATH} = "$ENV{PATH}:/vol/scripts:/vol/krona/bin";
 
-my ($infile, $outdir, $jobname, $krakendb_dir, $tmpdir);
+my ($infile, $aws_region, $outdir, $jobname, $krakendb_dir, $tmpdir);
 
 
 GetOptions("infile=s"       => \$infile,
+	   "aws_region=s"   => \$aws_region,
 	   "tmpdir=s"       => \$tmpdir,
 	   "outdir=s"       => \$outdir,
 	   "jobname=s"      => \$jobname,
@@ -21,11 +22,11 @@ GetOptions("infile=s"       => \$infile,
 
 my $threads = $ENV{"NSLOTS"};
 
-unless ($infile && $outdir && $jobname && $krakendb_dir && $tmpdir) {
-    die "\nusage: $0 -infile S3_HMP_BZ2 -jobname JOBNAME -outdir OUTDIR -tmpdir TMPDIR -krakendb KRAKEN_DB_S3_URL
+unless ($infile && $aws_region && $outdir && $jobname && $krakendb_dir && $tmpdir) {
+    die "\nusage: $0 -infile S3_HMP_BZ2 -aws_region AWS_REGION -jobname JOBNAME -outdir OUTDIR -tmpdir TMPDIR -krakendb KRAKEN_DB_S3_URL
 
 Example:
-$0 -krakendb /vol/scratch/krakendb -infile s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 -jobname SRS015996 -outdir /vol/spool -tmpdir /vol/scratch
+$0 -krakendb /vol/scratch/krakendb -infile s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 -aws_region us-west-2 -jobname SRS015996 -outdir /vol/spool -tmpdir /vol/scratch
 
 ";
 }
@@ -35,8 +36,8 @@ my $host = hostname;
 print STDERR "host: $host\n";
 
 print STDERR "Downloading FASTQ File to /vol/scratch/...\n";
-print STDERR "/vol/scripts/download.pl -type file -source $infile -dest /vol/scratch\n";
-system("/vol/scripts/download.pl -type file -source $infile -dest /vol/scratch");
+print STDERR "/vol/scripts/download.pl -type file -source $infile -aws_region $aws_region -dest /vol/scratch\n";
+system("/vol/scripts/download.pl -type file -source $infile -aws_region $aws_region -dest /vol/scratch");
 print STDERR "Done downloading FASTQ file.\n";
 
 chdir("/vol/scratch");
