@@ -18,14 +18,14 @@ Clone the Docker Kraken Pipeline from Github:
 
 Build the Docker image (optional, image is hosted by Docker Hub already):
 
-    sudo docker build -t "asczyrba/kraken-hmp" .
-    sudo docker push asczyrba/kraken-hmp
+    sudo docker build -t "asczyrba/kraken-hmp-os" .
+    sudo docker push asczyrba/kraken-hmp-os
 
 The following commands assume that you have a cluster of 99 slave nodes with 32 cores each.
 
 Download the Kraken DB:
 
-     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_download.sh 32 99 /vol/scratch /vol/spool /dev/shm s3://bibicloud-demo-oregon/kraken-db/krakendb_120GB.tar us-west-2 /vol/mem/krakendb
+     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_download.sh 32 2 /vol/scratch /vol/spool /dev/shm s3://bibicloud-demo/kraken-db/minikraken_20140330.tar eu-west-1 /vol/mem/krakendb
      
 Start the pipeline:
 
