@@ -14,13 +14,13 @@ SPOOLDIR=$2
 MEMDISK=$3
 COMMAND=$4
 
-sudo docker pull asczyrba/kraken-hmp
+sudo docker pull asczyrba/kraken-hmp-os
 sudo docker run \
     -e "NSLOTS=$NSLOTS" \
     -v $LOCALDIR:/vol/scratch \
     -v $SPOOLDIR:/vol/spool \
     -v $MEMDISK:/vol/mem \
-    asczyrba/kraken-hmp \
+    asczyrba/kraken-hmp-os \
     $COMMAND
 
 

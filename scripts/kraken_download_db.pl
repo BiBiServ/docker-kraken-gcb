@@ -37,8 +37,11 @@ print STDERR "Downloading Database to $download_dir...\n";
 #print STDERR "/vol/scripts/download.pl -type file -source $krakendb -dest $download_dir\n";
 #system("/vol/scripts/download.pl -type file -source $krakendb -dest $download_dir");
 
-print STDERR "java -jar /vol/scripts/bibis3-1.6.1.jar --region=$aws_region -d $krakendb $download_dir/\n";
-system("java -jar /vol/scripts/bibis3-1.6.1.jar --region=$aws_region -d $krakendb $download_dir/");
+#print STDERR "java -jar /vol/scripts/bibis3-1.6.1.jar --region=$aws_region -d $krakendb $download_dir/\n";
+#system("java -jar /vol/scripts/bibis3-1.6.1.jar --region=$aws_region -d $krakendb $download_dir/");
+
+print STDERR "aws s3 cp $krakendb $download_dir/ --region $aws_region --no-sign-request\n";
+system("aws s3 cp $krakendb $download_dir/ --region $aws_region --no-sign-request");
 
 chdir $krakendb_dir;
 my $kraken_tarfile = basename($krakendb);

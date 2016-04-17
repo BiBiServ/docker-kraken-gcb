@@ -36,8 +36,10 @@ my $host = hostname;
 print STDERR "host: $host\n";
 
 print STDERR "Downloading FASTQ File to /vol/scratch/...\n";
-print STDERR "/vol/scripts/download.pl -type file -source $infile -aws_region $aws_region -dest /vol/scratch\n";
-system("/vol/scripts/download.pl -type file -source $infile -aws_region $aws_region -dest /vol/scratch");
+#print STDERR "/vol/scripts/download.pl -type file -source $infile -aws_region $aws_region -dest /vol/scratch\n";
+#system("/vol/scripts/download.pl -type file -source $infile -aws_region $aws_region -dest /vol/scratch");
+print STDERR "aws s3 cp $infile /vol/scratch/ --region $aws_region --no-sign-request\n";
+system("aws s3 cp $infile /vol/scratch/ --region $aws_region --no-sign-request");
 print STDERR "Done downloading FASTQ file.\n";
 
 chdir("/vol/scratch");
