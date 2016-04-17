@@ -12,8 +12,9 @@ MAINTAINER Name asczyrba@cebitec.uni-bielefeld.de
 # e.g. RUN apt-get install -y -f bc
 
 RUN apt-get update && \
-    apt-get install -y -f perl-modules libgomp1 openjdk-7-jre-headless lbzip2 && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y -f perl-modules libgomp1 openjdk-7-jre-headless lbzip2 python-pip && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install awscli
 
 # create directories where the host file system can be mounted
 RUN mkdir /vol
