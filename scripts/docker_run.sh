@@ -17,6 +17,13 @@ COMMAND=$4
 sudo docker pull asczyrba/kraken-hmp-os
 sudo docker run \
     -e "NSLOTS=$NSLOTS" \
+    -e "http_proxy=$http_proxy" \
+    -e "FTP_PROXY=$FTP_PROXY" \
+    -e "ftp_proxy=$ftp_proxy" \
+    -e "HTTPS_PROXY=$HTTPS_PROXY" \
+    -e "https_proxy=$https_proxy" \
+    -e "no_proxy=$no_proxy" \
+    -e "HTTP_PROXY=$HTTP_PROXY" \
     -v $LOCALDIR:/vol/scratch \
     -v $SPOOLDIR:/vol/spool \
     -v $MEMDISK:/vol/mem \
