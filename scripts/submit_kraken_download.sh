@@ -20,6 +20,6 @@ KRAKENDB_DIR=$8
 PIPELINEHOME=`dirname $0`
 
 echo "Submitting job to SGE and waiting until finished..."
-echo qsub -cwd -t 1-$NUM_NODES -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $SPOOLDIR $MEMDISK "/vol/scripts/kraken_download_db.pl -krakendb $KRAKENDB -aws_region $AWS_REGION -download_dir $SCRATCHDIR -dest $KRAKENDB_DIR"
-qsub -cwd -N KrakenDB_download -t 1-$NUM_NODES -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $SPOOLDIR $MEMDISK "/vol/scripts/kraken_download_db.pl -krakendb $KRAKENDB -aws_region $AWS_REGION -download_dir $SCRATCHDIR -dest $KRAKENDB_DIR"
+echo qsub -V -cwd -t 1-$NUM_NODES -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $SPOOLDIR $MEMDISK "/vol/scripts/kraken_download_db.pl -krakendb $KRAKENDB -aws_region $AWS_REGION -download_dir $SCRATCHDIR -dest $KRAKENDB_DIR"
+qsub -cwd -V -N KrakenDB_download -t 1-$NUM_NODES -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $SPOOLDIR $MEMDISK "/vol/scripts/kraken_download_db.pl -krakendb $KRAKENDB -aws_region $AWS_REGION -download_dir $SCRATCHDIR -dest $KRAKENDB_DIR"
 
