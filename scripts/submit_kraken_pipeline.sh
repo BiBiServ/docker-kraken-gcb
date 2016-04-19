@@ -24,8 +24,8 @@ export PATH=$PIPELINEHOME/krona/bin:$PATH
 echo $PIPELINEHOME
 
 echo "Submitting job to SGE..."
-echo qsub -cwd -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $OUTDIR $MEMDISK "/vol/scripts/kraken_pipeline.pl -krakendb $KRAKENDB -infile $BZ2FILE -aws_region $AWS_REGION -outdir $OUTDIR -tmpdir $SCRATCHDIR -jobname $JOBNAME"
-qsub -N $JOBNAME -cwd -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $OUTDIR $MEMDISK "/vol/scripts/kraken_pipeline.pl -krakendb $KRAKENDB -infile $BZ2FILE -aws_region $AWS_REGION -outdir $OUTDIR -tmpdir $SCRATCHDIR -jobname $JOBNAME"
+echo qsub -V -cwd -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $OUTDIR $MEMDISK "/vol/scripts/kraken_pipeline.pl -krakendb $KRAKENDB -infile $BZ2FILE -aws_region $AWS_REGION -outdir $OUTDIR -tmpdir $SCRATCHDIR -jobname $JOBNAME"
+qsub -V -N $JOBNAME -cwd -pe multislot $SLOTS $PIPELINEHOME/docker_run.sh $SCRATCHDIR $OUTDIR $MEMDISK "/vol/scripts/kraken_pipeline.pl -krakendb $KRAKENDB -infile $BZ2FILE -aws_region $AWS_REGION -outdir $OUTDIR -tmpdir $SCRATCHDIR -jobname $JOBNAME"
 
 exit
 ## combine Kraken output and convert
