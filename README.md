@@ -65,7 +65,7 @@ you need to push the image to DockerHub:
 
 First we need to download the Kraken database to each of
 the hosts. We can use the SGE to distribute the jobs on the
-cluster. The -pe option ensures, that we only download the 
+cluster. The `-pe` option ensures, that we only download the 
 database **once on each host**:
 
     qsub -t 1-$NUM_NODES -pe multislot $NUM_CORES -cwd \
@@ -82,7 +82,7 @@ Start the pipeline for just one input file:
     $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
     "/vol/scripts/kraken_pipeline.sh SRR935726.fastq.gz SRR935726"
 
-You will find the output files in /vol/spool.
+You will find the output files in `/vol/spool`.
 
 If your pipeline is working, analyze all FASTQ files:
 
@@ -99,6 +99,10 @@ If your pipeline is working, analyze all FASTQ files:
     cd /vol/spool
     for i in *out; do cut -f2,3 $i > $i.krona; done
     ktImportTaxonomy *krona -o krona.html
+    cp krona.html ~/public_html
+    
+You can use your browser to look at the Krona output.
+Go to: `http://<IP OF BIBIGRID_MASTER>/~ubuntu/`
 
 ## Clean up
 
