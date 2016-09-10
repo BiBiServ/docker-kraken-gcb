@@ -1,26 +1,33 @@
 #!/bin/bash
 
-# script to submit to qsub array job, that calls "docker run..."
-# -> qsub -t 1-<num_tasks> -cwd docker_run.sh LOCALDIR SPOOLDIR COMMAND
-
 if [ $# -ne 4 ]
   then
-    echo "Usage: docker_run.sh LOCALDIR SPOOLDIR MEMDISK COMMAND"
+    echo 
+    echo "Usage: docker_run.sh CONTAINER SCRATCHDIR SPOOLDIR COMMAND"
+    echo 
+    echo "script to submit docker array job"
+    echo 
+    echo "qsub -t 1-<num_tasks> -cwd docker_run.sh CONTAINER SCRATCHDIR SPOOLDIR COMMAND"
+    echo 
+    echo "sets  \$SCRATCHDIR:/vol/scratch"
+    echo "      \$SPOOLDIR:/vol/spool"
+    echo 
+    echo "calls \"docker run COMMAND ...\""
+    echo 
     exit 0;
 fi
 
-LOCALDIR=$1
-SPOOLDIR=$2
-MEMDISK=$3
+CONTAINER=$1
+SCRATCHDIR=$2
+SPOOLDIR=$3
 COMMAND=$4
 
-sudo docker pull asczyrba/kraken-hmp
+sudo docker pull $CONTAINER
 sudo docker run \
     -e "NSLOTS=$NSLOTS" \
-    -v $LOCALDIR:/vol/scratch \
+    -v $SCRATCHDIR:/vol/scratch \
     -v $SPOOLDIR:/vol/spool \
-    -v $MEMDISK:/vol/mem \
-    asczyrba/kraken-hmp \
+    $CONTAINER \
     $COMMAND
 
 
