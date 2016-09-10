@@ -4,16 +4,17 @@
 ####
 
 # use the ubuntu:precise base image provided by dotCloud
-FROM ubuntu:14.04
+FROM bibiserv/gcb-ubuntu
 
 MAINTAINER Name asczyrba@cebitec.uni-bielefeld.de
 
-# install the required packages to the base ubuntu installation
-# e.g. RUN apt-get install -y -f bc
+# the following required packages from the base ubuntu installation
+# have already been installed in the bibiserv/ubuntu-gcb image
+# to avoid high download traffic during the tutorial
 
-RUN apt-get update && \
-    apt-get install -y -f perl-modules libgomp1 openjdk-7-jre-headless lbzip2 && \
-    rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && \
+#    apt-get install -y -f perl-modules libgomp1 openjdk-7-jre-headless lbzip2 && \
+#    rm -rf /var/lib/apt/lists/*
 
 # create directories where the host file system can be mounted
 RUN mkdir /vol
