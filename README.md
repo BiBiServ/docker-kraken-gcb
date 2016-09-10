@@ -42,8 +42,11 @@ Build the Docker image:
 
 Submit a script to each host to download the Kraken DB:
 
-     /vol/spool/docker-kraken-gcb/scripts/submit_kraken_download.sh $NUM_NODES $NUM_CORES $HOST_SCRATCHDIR $HOST_SPOOLDIR /dev/shm s3://bibicloud-demo-oregon/kraken-db/krakendb_120GB.tar us-west-2 /vol/mem/krakendb
-     
+    qsub -t 1-$NUM_NODES -pe multislot $NUM_CORES -cwd \
+    /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
+    $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
+    /vol/scripts/kraken_download_db.sh
+
 Start the pipeline:
 
      /vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh $NUM_CORES /vol/mem/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch /dev/shm
