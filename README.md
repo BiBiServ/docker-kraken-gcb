@@ -99,10 +99,10 @@ If your pipeline is working, analyze all FASTQ files:
     cd /vol/spool
     for i in *out; do cut -f2,3 $i > $i.krona; done
     ktImportTaxonomy *krona -o krona.html
-    cp krona.html ~/public_html
+    cp -r krona.html* ~/public_html
     
 You can use your browser to look at the Krona output.
-Go to: `http://<IP OF BIBIGRID_MASTER>/~ubuntu/`
+Go to: `http://<BIBIGRID_MASTER>/~ubuntu/`
 
 ## Clean up
 
