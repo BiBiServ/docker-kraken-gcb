@@ -20,6 +20,7 @@ the master node and continue working on the master node.
 
 Clone the Docker Kraken Pipeline from Github:
 
+    cd /vol/spool
     git clone https://github.com/bibiserv/docker-kraken-gcb.git
     cd docker-kraken-gcb
 
@@ -33,10 +34,11 @@ easier to copy & paste the commands:
     export HOST_SPOOLDIR=/vol/spool
     export HOST_SCRATCHDIR=/vol/scratch
 
-Build the Docker image (optional, image is hosted by Docker Hub already):
+Build the Docker image:
 
-    sudo docker build -t "USER/kraken-docker" .
-    sudo docker push USER/kraken-docker
+    docker build -t "$DOCKER_USERNAME/kraken-docker" .
+    docker login -u $DOCKER_USERNAME
+    docker push $DOCKER_USERNAME/kraken-docker
 
 Submit a script to each host to download the Kraken DB:
 
