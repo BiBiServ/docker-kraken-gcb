@@ -75,16 +75,36 @@ database **once on each host**:
 
 ### Run Kraken Analysis
 
-Start the pipeline:
+Start the pipeline for just one input file:
 
     qsub -pe multislot $NUM_CORES -cwd \
     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
     $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
     "/vol/scripts/kraken_pipeline.sh SRR935726.fastq.gz SRR935726"
 
+You will find the output files in /vol/spool.
+
+If your pipeline is working, analyze all FASTQ files:
+
+    for i in `cat samples.txt | sed 's/.fastq.gz//g'`
+    do 
+    qsub -pe multislot $NUM_CORES -cwd \
+    /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
+    $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
+    "/vol/scripts/kraken_pipeline.sh $i.fastq.gz $i" \
+    done
+    
+### Generate Krona plot
+
+    cd /vol/spool
+    for i in *out; do cut -f2,3 $i > $i.krona; done
+    ktImportTaxonomy *krona -o krona.html
+
+## Clean up
+
 After logout, terminate the BiBiGrid cluster:
 
-    bibigrid.sh -l
-    bibigrid.sh -t CLUSTERID
+    bibigrid -o bibigrid.properties -l
+    bibigrid -o bibigrid.properties -t CLUSTERID
     
 
