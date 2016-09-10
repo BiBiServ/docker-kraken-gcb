@@ -77,7 +77,10 @@ database **once on each host**:
 
 Start the pipeline:
 
-     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh $NUM_CORES /vol/mem/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch /dev/shm
+     qsub -pe multislot $NUM_CORES -cwd \
+     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
+     $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \ 
+     "/vol/scripts/kraken_pipeline.sh SRR935726.fastq.gz SRR935726"
 
 After logout, terminate the BiBiGrid cluster:
 
