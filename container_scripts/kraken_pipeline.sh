@@ -25,7 +25,7 @@ echo "Done downloading FASTQ file."
 
 cd $SPOOLDIR
 
-OUTFILE="$SCRATCHDIR/$OUTNAME.out"
+OUTFILE="$SPOOLDIR/$OUTNAME.out"
 REPORTFILE="$SPOOLDIR/$OUTNAME.report"
 
 ## run kraken
@@ -40,5 +40,5 @@ echo "/vol/kraken/kraken-report --db $SCRATCHDIR $OUTFILE > $REPORTFILE"
 /vol/kraken/kraken-report --db $SCRATCHDIR $OUTFILE > $REPORTFILE
 echo "Kraken report done"
 
-rm -v $OUTFILE
+#rm -v $OUTFILE
 rm -v $SCRATCHDIR/$INFILE
