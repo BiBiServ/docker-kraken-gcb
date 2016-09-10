@@ -1,6 +1,6 @@
-docker-kraken-gcb
-=================
+# docker-kraken-gcb
 
+## Start BiBiGrid Cluster
 First, we need to start a bibigrid cluster in the cloud. If you have
 not done this already, edit the properties file downloaded from the
 gcb-tutorial repository and add your credentials and path to your SSH
@@ -14,6 +14,7 @@ Login to master node (see BiBiGrid output how to set environment variables):
 
     ssh -i ~/.ssh/SSH_CREDENTIALS.pem ssh -i id_rsa ubuntu@$BIBIGRID_MASTER
 
+## Download Github repository
 Now your are logged on to the master node of your cloud-based SGE
 cluster! We will clone the docker-kraken-gcb github repository to
 the master node and continue working on the master node.
@@ -24,6 +25,7 @@ Clone the Docker Kraken Pipeline from Github:
     git clone https://github.com/bibiserv/docker-kraken-gcb.git
     cd docker-kraken-gcb
 
+## Set environment variables
 The command line calls on this page assume that you have several
 environment variables set for your cloud environment. This makes it
 easier to copy & paste the commands:
@@ -34,18 +36,44 @@ easier to copy & paste the commands:
     export HOST_SPOOLDIR=/vol/spool
     export HOST_SCRATCHDIR=/vol/scratch
 
-Build the Docker image:
+## Kraken Docker Image
+
+The Dockerfile includes all information about the Docker image.
+Place scripts you want to have accessible in the image
+into the container_scripts directory. These scripts will be
+called to donwload the database to the hosts and run the analyses.
+
+### Login to DockerHub
+
+We need to pull the updated image to each of the hosts
+before we can start the analysis scripts. Before pushing 
+to the DockerHub, you need to login:
+
+    docker login -u $DOCKER_USERNAME
+    
+### Building and Pushing the Docker Image 
+
+Now every time you made a changes to the container scripts,
+you need to push the image to DockerHub:
 
     docker build -t "$DOCKER_USERNAME/kraken-docker" .
-    docker login -u $DOCKER_USERNAME
     docker push $DOCKER_USERNAME/kraken-docker
 
-Submit a script to each host to download the Kraken DB:
+## Running Kraken containers on the cluster nodes
+
+### Download Kraken Database
+
+First we need to download the Kraken database to each of
+the hosts. We can use the SGE to distribute the jobs on the
+cluster. The -pe option ensures, that we only download the 
+database **once on each host**:
 
     qsub -t 1-$NUM_NODES -pe multislot $NUM_CORES -cwd \
     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
     $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
     /vol/scripts/kraken_download_db.sh
+
+### Run Kraken Analysis
 
 Start the pipeline:
 
