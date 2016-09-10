@@ -13,5 +13,5 @@ echo "extracting database files..."
 
 cd /vol/scratch
 tar xvzf minikraken.tgz
-
+rm minikraken.tgz
 echo "done extracting files."
