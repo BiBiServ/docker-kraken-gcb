@@ -68,7 +68,7 @@ the hosts. We can use the SGE to distribute the jobs on the
 cluster. The `-pe` option ensures, that we only download the 
 database **once on each host**:
 
-    qsub -t 1-$NUM_NODES -pe multislot $NUM_CORES -cwd \
+    qsub -N DB_Download -t 1-$NUM_NODES -pe multislot $NUM_CORES -cwd \
     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
     $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
     /vol/scripts/kraken_download_db.sh
@@ -77,7 +77,7 @@ database **once on each host**:
 
 Start the pipeline for just one input file:
 
-    qsub -pe multislot $NUM_CORES -cwd \
+    qsub -N kraken_SRR935726 -pe multislot $NUM_CORES -cwd \
     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
     $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
     "/vol/scripts/kraken_pipeline.sh SRR935726.fastq.gz SRR935726"
@@ -88,10 +88,10 @@ If your pipeline is working, analyze all FASTQ files:
 
     for i in `cat samples.txt | sed 's/.fastq.gz//g'`
     do 
-    qsub -pe multislot $NUM_CORES -cwd \
+    qsub -N kraken_$i -pe multislot $NUM_CORES -cwd \
     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
     $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
-    "/vol/scripts/kraken_pipeline.sh $i.fastq.gz $i" \
+    "/vol/scripts/kraken_pipeline.sh $i.fastq.gz $i"
     done
     
 ### Generate Krona plot
