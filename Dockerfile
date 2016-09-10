@@ -11,7 +11,7 @@ FROM bibiserv/gcb-ubuntu
 # to avoid high download traffic during the tutorial
 
 #RUN apt-get update && \
-#    apt-get install -y -f perl-modules libgomp1 openjdk-7-jre-headless lbzip2 && \
+#    apt-get install -y -f perl-modules libgomp1 python-swiftclient && \
 #    rm -rf /var/lib/apt/lists/*
 
 # create directories where the host file system can be mounted
