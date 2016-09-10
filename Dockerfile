@@ -6,8 +6,6 @@
 # use the ubuntu:precise base image provided by dotCloud
 FROM bibiserv/gcb-ubuntu
 
-MAINTAINER Name asczyrba@cebitec.uni-bielefeld.de
-
 # the following required packages from the base ubuntu installation
 # have already been installed in the bibiserv/ubuntu-gcb image
 # to avoid high download traffic during the tutorial
@@ -23,7 +21,5 @@ RUN mkdir /vol
 # Docker image and make them executable
 ADD ./kraken/ /vol/kraken/
 RUN chmod 755 /vol/kraken/*
-ADD ./scripts/ /vol/scripts/
+ADD ./container_scripts/ /vol/scripts/
 
-# set entrypoint to initialize the pipeline
-#ENTRYPOINT ["/vol/scripts/init_pipeline.sh"]
