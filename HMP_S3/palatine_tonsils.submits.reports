@@ -1,6 +1,0 @@
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS013947 s3://human-microbiome-project/HHS/HMASM/WGS/palatine_tonsils/SRS013947.tar.bz2 /vol/spool /vol/scratch
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS014474 s3://human-microbiome-project/HHS/HMASM/WGS/palatine_tonsils/SRS014474.tar.bz2 /vol/spool /vol/scratch
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS015061 s3://human-microbiome-project/HHS/HMASM/WGS/palatine_tonsils/SRS015061.tar.bz2 /vol/spool /vol/scratch
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS019026 s3://human-microbiome-project/HHS/HMASM/WGS/palatine_tonsils/SRS019026.tar.bz2 /vol/spool /vol/scratch
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS019126 s3://human-microbiome-project/HHS/HMASM/WGS/palatine_tonsils/SRS019126.tar.bz2 /vol/spool /vol/scratch
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_report.sh 4 /vol/scratch/krakendb SRS063351 s3://human-microbiome-project/HHS/HMASM/WGS/palatine_tonsils/SRS063351.tar.bz2 /vol/spool /vol/scratch

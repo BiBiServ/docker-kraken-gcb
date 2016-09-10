@@ -1,3 +1,0 @@
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS013942 s3://human-microbiome-project/HHS/HMASM/WGS/saliva/SRS013942.tar.bz2 us-west-2 /vol/spool /vol/scratch /dev/shm
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS015055 s3://human-microbiome-project/HHS/HMASM/WGS/saliva/SRS015055.tar.bz2 us-west-2 /vol/spool /vol/scratch /dev/shm
-/vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 4 /vol/mem/krakendb SRS019120 s3://human-microbiome-project/HHS/HMASM/WGS/saliva/SRS019120.tar.bz2 us-west-2 /vol/spool /vol/scratch /dev/shm
