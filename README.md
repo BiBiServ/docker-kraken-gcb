@@ -1,35 +1,50 @@
-docker-kraken-hmp
+docker-kraken-gcb
 =================
 
-Edit the bibigrid.properties file provided in the repository and add your ceredentials and
-path to your SSH key file.
+First, we need to start a bibigrid cluster in the cloud. If you have
+not done this already, edit the properties file downloaded from the
+gcb-tutorial repository and add your credentials and path to your SSH
+key file. 
 
 Start bibigrid:
 
-    bibigrid.sh -u USER -c -o bibigrid.properties
+    bibigrid -u $USER -c -o bibigrid.properties
 
 Login to master node (see BiBiGrid output how to set environment variables):
 
-    ssh -i ~/.ssh/SSH_CREDENTIALS.pem ubuntu@ec2-??????.compute.amazonaws.com
+    ssh -i ~/.ssh/SSH_CREDENTIALS.pem ssh -i id_rsa ubuntu@$BIBIGRID_MASTER
+
+Now your are logged on to the master node of your cloud-based SGE
+cluster! We will clone the docker-kraken-gcb github repository to
+the master node and continue working on the master node.
 
 Clone the Docker Kraken Pipeline from Github:
 
-    git clone https://github.com/asczyrba/docker-kraken-hmp.git
+    git clone https://github.com/bibiserv/docker-kraken-gcb.git
+    cd docker-kraken-gcb
+
+The command line calls on this page assume that you have several
+environment variables set for your cloud environment. This makes it
+easier to copy & paste the commands:
+
+    export DOCKER_USERNAME=<DOCKERHUB ACCOUNT NAME>
+    export NUM_NODES=4
+    export NUM_CORES=4
+    export HOST_SPOOLDIR=/vol/spool
+    export HOST_SCRATCHDIR=/vol/scratch
 
 Build the Docker image (optional, image is hosted by Docker Hub already):
 
-    sudo docker build -t "asczyrba/kraken-hmp" .
-    sudo docker push asczyrba/kraken-hmp
+    sudo docker build -t "USER/kraken-docker" .
+    sudo docker push USER/kraken-docker
 
-The following commands assume that you have a cluster of 99 slave nodes with 32 cores each.
+Submit a script to each host to download the Kraken DB:
 
-Download the Kraken DB:
-
-     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_download.sh 32 99 /vol/scratch /vol/spool /dev/shm s3://bibicloud-demo-oregon/kraken-db/krakendb_120GB.tar us-west-2 /vol/mem/krakendb
+     /vol/spool/docker-kraken-gcb/scripts/submit_kraken_download.sh $NUM_NODES $NUM_CORES $HOST_SCRATCHDIR $HOST_SPOOLDIR /dev/shm s3://bibicloud-demo-oregon/kraken-db/krakendb_120GB.tar us-west-2 /vol/mem/krakendb
      
 Start the pipeline:
 
-     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh 32 /vol/mem/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch /dev/shm
+     /vol/spool/docker-kraken-hmp/scripts/submit_kraken_pipeline.sh $NUM_CORES /vol/mem/krakendb SRS015996 s3://human-microbiome-project/HHS/HMASM/WGS/anterior_nares/SRS015996.tar.bz2 /vol/spool /vol/scratch /dev/shm
 
 After logout, terminate the BiBiGrid cluster:
 
