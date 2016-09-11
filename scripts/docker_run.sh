@@ -1,15 +1,16 @@
 #!/bin/bash
 
-if [ $# -ne 4 ]
+if [ $# -ne 5 ]
   then
     echo 
-    echo "Usage: docker_run.sh CONTAINER SCRATCHDIR SPOOLDIR COMMAND"
+    echo "Usage: docker_run.sh CONTAINER DBDIR DATADIR SPOOLDIR COMMAND"
     echo 
     echo "script to submit docker array job"
     echo 
-    echo "qsub -t 1-<num_tasks> -cwd docker_run.sh CONTAINER SCRATCHDIR SPOOLDIR COMMAND"
+    echo "qsub -t 1-<num_tasks> -cwd docker_run.sh CONTAINER DBDIR DATADIR SPOOLDIR COMMAND"
     echo 
-    echo "sets  \$SCRATCHDIR:/vol/scratch"
+    echo "sets  \$DBDIR:/vol/db"
+    echo "      \$DATADIR:/vol/data"
     echo "      \$SPOOLDIR:/vol/spool"
     echo 
     echo "calls \"docker run COMMAND ...\""
@@ -18,14 +19,16 @@ if [ $# -ne 4 ]
 fi
 
 CONTAINER=$1
-SCRATCHDIR=$2
-SPOOLDIR=$3
-COMMAND=$4
+DBDIR=$2
+DATADIR=$3
+SPOOLDIR=$4
+COMMAND=$5
 
 sudo docker pull $CONTAINER
 sudo docker run \
     -e "NSLOTS=$NSLOTS" \
-    -v $SCRATCHDIR:/vol/scratch \
+    -v $DBDIR:/vol/db \
+    -v $DATADIR:/vol/data \
     -v $SPOOLDIR:/vol/spool \
     $CONTAINER \
     $COMMAND
