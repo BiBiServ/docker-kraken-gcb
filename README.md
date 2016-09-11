@@ -30,11 +30,11 @@ The command line calls on this page assume that you have several
 environment variables set for your cloud environment. This makes it
 easier to copy & paste the commands:
 
-    export DOCKER_USERNAME=<DOCKERHUB ACCOUNT NAME>
     export NUM_NODES=4
     export NUM_CORES=4
     export HOST_SPOOLDIR=/vol/spool
-    export HOST_SCRATCHDIR=/vol/scratch
+    export HOST_DATADIR=/gcb_data
+    export DOCKER_USERNAME=<DOCKERHUB ACCOUNT NAME>
 
 ## Kraken Docker Image
 
@@ -63,15 +63,9 @@ you need to push the image to DockerHub:
 
 ### Download Kraken Database
 
-First we need to download the Kraken database to each of
-the hosts. We can use the SGE to distribute the jobs on the
-cluster. The `-pe` option ensures, that we only download the 
-database **once on each host**:
-
-    qsub -N DB_Download -t 1-$NUM_NODES -pe multislot $NUM_CORES -cwd \
-    /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
-    $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
-    /vol/scripts/kraken_download_db.sh
+In the Giessen setup, we do not need to download any data to the hosts,
+as data volumes are mounted to the master node and shared via
+NFS.
 
 ### Run Kraken Analysis
 
@@ -79,7 +73,7 @@ Start the pipeline for just one input file:
 
     qsub -N kraken_SRR935726 -pe multislot $NUM_CORES -cwd \
     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
-    $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
+    $DOCKER_USERNAME/kraken-docker $HOST_DATADIR $HOST_SPOOLDIR \
     "/vol/scripts/kraken_pipeline.sh SRR935726.fastq.gz SRR935726"
 
 You will find the output files in `/vol/spool`.
