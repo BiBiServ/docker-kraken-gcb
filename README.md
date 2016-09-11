@@ -19,11 +19,12 @@ Now your are logged on to the master node of your cloud-based SGE
 cluster! We will clone the docker-kraken-gcb github repository to
 the master node and continue working on the master node.
 
-Clone the Docker Kraken Pipeline from Github:
+Clone the Docker Kraken Pipeline from Github and pull the branch 'giessen':
 
     cd /vol/spool
     git clone https://github.com/bibiserv/docker-kraken-gcb.git
     cd docker-kraken-gcb
+    git pull origin giessen
 
 ## Set environment variables
 The command line calls on this page assume that you have several
@@ -32,8 +33,8 @@ easier to copy & paste the commands:
 
     export NUM_NODES=4
     export NUM_CORES=4
-    export HOST_SPOOLDIR=/vol/spool
-    export HOST_DATADIR=/gcb_data
+    export HOST_DBDIR=/vol/spool/krakendb
+    export HOST_DATADIR=/vol/spool/data
     export DOCKER_USERNAME=<DOCKERHUB ACCOUNT NAME>
 
 ## Kraken Docker Image
@@ -73,7 +74,7 @@ Start the pipeline for just one input file:
 
     qsub -N kraken_SRR935726 -pe multislot $NUM_CORES -cwd \
     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
-    $DOCKER_USERNAME/kraken-docker $HOST_DATADIR $HOST_SPOOLDIR \
+    $DOCKER_USERNAME/kraken-docker $HOST_DBDIR $HOST_DATADIR $HOST_SPOOLDIR \
     "/vol/scripts/kraken_pipeline.sh SRR935726.fastq.gz SRR935726"
 
 You will find the output files in `/vol/spool`.
@@ -84,7 +85,7 @@ If your pipeline is working, analyze all FASTQ files:
     do 
     qsub -N kraken_$i -pe multislot $NUM_CORES -cwd \
     /vol/spool/docker-kraken-gcb/scripts/docker_run.sh \
-    $DOCKER_USERNAME/kraken-docker $HOST_SCRATCHDIR $HOST_SPOOLDIR \
+    $DOCKER_USERNAME/kraken-docker $HOST_DBDIR $HOST_DATADIR $HOST_SPOOLDIR \
     "/vol/scripts/kraken_pipeline.sh $i.fastq.gz $i"
     done
     
