@@ -30,11 +30,11 @@ The command line calls on this page assume that you have several
 environment variables set for your cloud environment. This makes it
 easier to copy & paste the commands:
 
-    export DOCKER_USERNAME=<DOCKERHUB ACCOUNT NAME>
     export NUM_NODES=4
     export NUM_CORES=4
     export HOST_SPOOLDIR=/vol/spool
     export HOST_SCRATCHDIR=/vol/scratch
+    export DOCKER_USERNAME=<DOCKERHUB ACCOUNT NAME>
 
 ## Kraken Docker Image
 
