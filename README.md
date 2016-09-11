@@ -33,8 +33,9 @@ easier to copy & paste the commands:
 
     export NUM_NODES=4
     export NUM_CORES=4
-    export HOST_DBDIR=/vol/spool/krakendb
-    export HOST_DATADIR=/vol/spool/data
+    export HOST_DBDIR=/vol/krakendb
+    export HOST_DATADIR=/vol/data
+    export HOST_SPOOLDIR=/vol/spool
     export DOCKER_USERNAME=<DOCKERHUB ACCOUNT NAME>
 
 ## Kraken Docker Image
